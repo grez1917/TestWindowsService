@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWindowsService", "TestWindowsService\TestWindowsService.csproj", "{B953BD94-3149-46B6-92C7-B3B207DDDEF3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{76F2A48A-3B84-4E68-99B8-13FEE4B9074D}"
+	ProjectSection(SolutionItems) = preProject
+		read.cs = read.cs
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B953BD94-3149-46B6-92C7-B3B207DDDEF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B953BD94-3149-46B6-92C7-B3B207DDDEF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B953BD94-3149-46B6-92C7-B3B207DDDEF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B953BD94-3149-46B6-92C7-B3B207DDDEF3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

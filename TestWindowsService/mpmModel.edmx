@@ -1,0 +1,2353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="mpmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="buscon">
+          <Key>
+            <PropertyRef Name="id_buscon" />
+          </Key>
+          <Property Name="id_buscon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="perusahaan" Type="int" />
+          <Property Name="review" Type="int" />
+          <Property Name="review_name" Type="varchar" MaxLength="50" />
+          <Property Name="no_report_fra" Type="varchar" MaxLength="50" />
+          <Property Name="tanggal" Type="date" />
+          <Property Name="penugasan_start" Type="date" />
+          <Property Name="penugasan_end" Type="date" />
+          <Property Name="ketua_tim" Type="int" />
+          <Property Name="status_final" Type="varchar" MaxLength="50" />
+          <Property Name="created_by" Type="int" />
+        </EntityType>
+        <EntityType Name="buscon_anggota">
+          <Key>
+            <PropertyRef Name="id_anggota_buscon" />
+          </Key>
+          <Property Name="id_anggota_buscon" Type="int" Nullable="false" />
+          <Property Name="id_buscon" Type="int" />
+          <Property Name="user" Type="int" />
+        </EntityType>
+        <EntityType Name="buscon_judul">
+          <Key>
+            <PropertyRef Name="id_judul_buscon" />
+          </Key>
+          <Property Name="id_judul_buscon" Type="int" Nullable="false" />
+          <Property Name="id_buscon" Type="int" />
+          <Property Name="judul" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="buscon_kondisi">
+          <Key>
+            <PropertyRef Name="id_kondisi" />
+          </Key>
+          <Property Name="id_kondisi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kondisi" Type="varchar" MaxLength="256" />
+          <Property Name="kriteria" Type="varchar(max)" />
+          <Property Name="id_judul_buscon" Type="int" />
+        </EntityType>
+        <EntityType Name="buscon_kondisi_berkas">
+          <Key>
+            <PropertyRef Name="id_kondisi_berkas" />
+          </Key>
+          <Property Name="id_kondisi_berkas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_kondisi" Type="int" />
+          <Property Name="FileName" Type="varchar(max)" />
+          <Property Name="Extension" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="buscon_kriteria_berkas">
+          <Key>
+            <PropertyRef Name="id_kriteria" />
+          </Key>
+          <Property Name="id_kriteria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="varchar(max)" />
+          <Property Name="Extension" Type="varchar" MaxLength="50" />
+          <Property Name="id_kondisi" Type="int" />
+        </EntityType>
+        <EntityType Name="buscon_progress">
+          <Key>
+            <PropertyRef Name="id_progress" />
+          </Key>
+          <Property Name="id_progress" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tanggal" Type="date" />
+          <Property Name="progress" Type="varchar(max)" />
+          <Property Name="deadline" Type="date" />
+          <Property Name="modify_by" Type="int" />
+          <Property Name="id_sebab_akibat" Type="int" />
+        </EntityType>
+        <EntityType Name="buscon_progress_berkas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="varchar(max)" />
+          <Property Name="Extension" Type="varchar" MaxLength="50" />
+          <Property Name="id_progress" Type="int" />
+        </EntityType>
+        <EntityType Name="buscon_remind_once">
+          <Key>
+            <PropertyRef Name="id_one_time" />
+          </Key>
+          <Property Name="id_one_time" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_buscon" Type="int" />
+          <Property Name="tanggal" Type="date" />
+          <Property Name="on_off" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="buscon_remind_weekly">
+          <Key>
+            <PropertyRef Name="id_weekly" />
+          </Key>
+          <Property Name="id_weekly" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_buscon" Type="int" />
+          <Property Name="senin" Type="bit" Nullable="false" />
+          <Property Name="selasa" Type="bit" Nullable="false" />
+          <Property Name="rabu" Type="bit" Nullable="false" />
+          <Property Name="kamis" Type="bit" Nullable="false" />
+          <Property Name="jumat" Type="bit" Nullable="false" />
+          <Property Name="sabtu" Type="bit" Nullable="false" />
+          <Property Name="on_off" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="buscon_sebab_akibat">
+          <Key>
+            <PropertyRef Name="id_sebab_akibat" />
+          </Key>
+          <Property Name="id_sebab_akibat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sebab" Type="varchar(max)" />
+          <Property Name="akibat" Type="varchar(max)" />
+          <Property Name="rekomendasi" Type="varchar" MaxLength="256" />
+          <Property Name="action_plant_mgmt" Type="varchar" MaxLength="256" />
+          <Property Name="deadline" Type="date" />
+          <Property Name="risk" Type="varchar" MaxLength="50" />
+          <Property Name="status_close" Type="bit" Nullable="false" />
+          <Property Name="pic" Type="int" />
+        </EntityType>
+        <EntityType Name="divisi">
+          <Key>
+            <PropertyRef Name="id_divisi" />
+          </Key>
+          <Property Name="id_divisi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kode_divisi" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="nama_divisi" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="hirarki">
+          <Key>
+            <PropertyRef Name="id_hirarki" />
+          </Key>
+          <Property Name="id_hirarki" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="level" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="level_parent" Type="int" />
+          <Property Name="non_overdue" Type="bit" Nullable="false" />
+          <Property Name="overdue1_30" Type="bit" Nullable="false" />
+          <Property Name="overdue30_" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="perusahaan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nama" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="review">
+          <Key>
+            <PropertyRef Name="id_review" />
+          </Key>
+          <Property Name="id_review" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nama_review" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="simo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="review_name" Type="varchar" MaxLength="50" />
+          <Property Name="no_review" Type="varchar" MaxLength="50" />
+          <Property Name="tanggal" Type="datetime" />
+          <Property Name="tempat" Type="varchar" MaxLength="50" />
+          <Property Name="peserta" Type="varchar" MaxLength="255" />
+          <Property Name="jam" Type="varchar" MaxLength="50" />
+          <Property Name="created_by" Type="int" />
+          <Property Name="id_perusahaan" Type="int" />
+          <Property Name="status_lanjut" Type="bit" />
+          <Property Name="id_sebelum" Type="int" />
+          <Property Name="id_sesudah" Type="int" />
+        </EntityType>
+        <EntityType Name="simo_detail">
+          <Key>
+            <PropertyRef Name="id_detail" />
+          </Key>
+          <Property Name="id_detail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int" />
+          <Property Name="tema" Type="varchar" MaxLength="50" />
+          <Property Name="deskripsi" Type="varchar" MaxLength="512" />
+          <Property Name="divisi" Type="varchar" MaxLength="50" />
+          <Property Name="pic" Type="varchar" MaxLength="50" />
+          <Property Name="deadline" Type="date" />
+          <Property Name="status" Type="int" />
+          <Property Name="last_update" Type="date" />
+          <Property Name="is_close" Type="bit" />
+        </EntityType>
+        <EntityType Name="simo_detail_berkas">
+          <Key>
+            <PropertyRef Name="id_detail_berkas" />
+          </Key>
+          <Property Name="id_detail_berkas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="waktu_simpan" Type="datetime" />
+          <Property Name="berkas" Type="varchar(max)" />
+          <Property Name="id_detail" Type="int" />
+          <Property Name="progress" Type="varchar" MaxLength="125" />
+          <Property Name="modify_by" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="simo_detail_berkas_deskripsi">
+          <Key>
+            <PropertyRef Name="Id_berkas" />
+          </Key>
+          <Property Name="Id_berkas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="varchar(max)" />
+          <Property Name="Extension" Type="varchar" MaxLength="50" />
+          <Property Name="id_detail_berkas" Type="int" />
+        </EntityType>
+        <EntityType Name="simo_detail_pic">
+          <Key>
+            <PropertyRef Name="id_detail_pic" />
+          </Key>
+          <Property Name="id_detail_pic" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_detail" Type="int" />
+          <Property Name="divisi" Type="int" />
+          <Property Name="pic" Type="int" />
+          <Property Name="npk" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="simo_remind_date">
+          <Key>
+            <PropertyRef Name="id_one_time" />
+          </Key>
+          <Property Name="id_one_time" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int" />
+          <Property Name="tanggal" Type="date" />
+          <Property Name="on_off" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="simo_remind_weekly">
+          <Key>
+            <PropertyRef Name="id_weekly" />
+          </Key>
+          <Property Name="id_weekly" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int" />
+          <Property Name="senin" Type="bit" Nullable="false" />
+          <Property Name="selasa" Type="bit" Nullable="false" />
+          <Property Name="rabu" Type="bit" Nullable="false" />
+          <Property Name="kamis" Type="bit" Nullable="false" />
+          <Property Name="jumat" Type="bit" Nullable="false" />
+          <Property Name="sabtu" Type="bit" Nullable="false" />
+          <Property Name="on_off" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="status_reminder" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="idUserRoles" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="idUserRoles" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_hirarki" Type="int" />
+          <Property Name="id_divisi" Type="int" />
+          <Property Name="idRoleAtasan" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="level_parent" Type="int" />
+          <Property Name="id_divisi" Type="int" />
+          <Property Name="id_hirarki" Type="int" />
+          <Property Name="alias" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_buscon_anggota_buscon">
+          <End Role="buscon" Type="Self.buscon" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_anggota" Type="Self.buscon_anggota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon">
+              <PropertyRef Name="id_buscon" />
+            </Principal>
+            <Dependent Role="buscon_anggota">
+              <PropertyRef Name="id_buscon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_anggota_user">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="buscon_anggota" Type="Self.buscon_anggota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="buscon_anggota">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_created_by">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="buscon" Type="Self.buscon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="buscon">
+              <PropertyRef Name="created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_ketua">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="buscon" Type="Self.buscon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="buscon">
+              <PropertyRef Name="ketua_tim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_kondisi_berkas">
+          <End Role="buscon_kondisi" Type="Self.buscon_kondisi" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_kondisi_berkas" Type="Self.buscon_kondisi_berkas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon_kondisi">
+              <PropertyRef Name="id_kondisi" />
+            </Principal>
+            <Dependent Role="buscon_kondisi_berkas">
+              <PropertyRef Name="id_kondisi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_kondisi_buscon_judul">
+          <End Role="buscon_judul" Type="Self.buscon_judul" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_kondisi" Type="Self.buscon_kondisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon_judul">
+              <PropertyRef Name="id_judul_buscon" />
+            </Principal>
+            <Dependent Role="buscon_kondisi">
+              <PropertyRef Name="id_judul_buscon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_kriteria_buscon_kondisi">
+          <End Role="buscon_kondisi" Type="Self.buscon_kondisi" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_kriteria_berkas" Type="Self.buscon_kriteria_berkas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon_kondisi">
+              <PropertyRef Name="id_kondisi" />
+            </Principal>
+            <Dependent Role="buscon_kriteria_berkas">
+              <PropertyRef Name="id_kondisi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_remind_once_buscon">
+          <End Role="buscon" Type="Self.buscon" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_remind_once" Type="Self.buscon_remind_once" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon">
+              <PropertyRef Name="id_buscon" />
+            </Principal>
+            <Dependent Role="buscon_remind_once">
+              <PropertyRef Name="id_buscon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_remind_weekly_buscon">
+          <End Role="buscon" Type="Self.buscon" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_remind_weekly" Type="Self.buscon_remind_weekly" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon">
+              <PropertyRef Name="id_buscon" />
+            </Principal>
+            <Dependent Role="buscon_remind_weekly">
+              <PropertyRef Name="id_buscon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_review">
+          <End Role="review" Type="Self.review" Multiplicity="0..1" />
+          <End Role="buscon" Type="Self.buscon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="review">
+              <PropertyRef Name="id_review" />
+            </Principal>
+            <Dependent Role="buscon">
+              <PropertyRef Name="review" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserRoles_atasan">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="idRoleAtasan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserRoles_dbo_divisi">
+          <End Role="divisi" Type="Self.divisi" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="divisi">
+              <PropertyRef Name="id_divisi" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="id_divisi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserRoles_dbo_hirarki">
+          <End Role="hirarki" Type="Self.hirarki" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hirarki">
+              <PropertyRef Name="id_hirarki" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="id_hirarki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserRoles_dbo_Roles_RoleId">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserRoles_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hirarki_atasan">
+          <End Role="hirarki" Type="Self.hirarki" Multiplicity="0..1" />
+          <End Role="hirarki1" Type="Self.hirarki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hirarki">
+              <PropertyRef Name="id_hirarki" />
+            </Principal>
+            <Dependent Role="hirarki1">
+              <PropertyRef Name="level_parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_judul_buscon">
+          <End Role="buscon" Type="Self.buscon" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_judul" Type="Self.buscon_judul" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="buscon">
+              <PropertyRef Name="id_buscon" />
+            </Principal>
+            <Dependent Role="buscon_judul">
+              <PropertyRef Name="id_judul_buscon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Perusahaan_buscon">
+          <End Role="perusahaan" Type="Self.perusahaan" Multiplicity="0..1" />
+          <End Role="buscon" Type="Self.buscon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="perusahaan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="buscon">
+              <PropertyRef Name="perusahaan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Perusahaan_simo">
+          <End Role="perusahaan" Type="Self.perusahaan" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="simo" Type="Self.simo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="perusahaan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="simo">
+              <PropertyRef Name="id_perusahaan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pic_buscon_user">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="buscon_sebab_akibat" Type="Self.buscon_sebab_akibat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="buscon_sebab_akibat">
+              <PropertyRef Name="pic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_progress">
+          <End Role="buscon_progress" Type="Self.buscon_progress" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_progress_berkas" Type="Self.buscon_progress_berkas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon_progress">
+              <PropertyRef Name="id_progress" />
+            </Principal>
+            <Dependent Role="buscon_progress_berkas">
+              <PropertyRef Name="id_progress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_progress_buscon_user">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="buscon_progress" Type="Self.buscon_progress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="buscon_progress">
+              <PropertyRef Name="modify_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sebab_akibat">
+          <End Role="buscon_sebab_akibat" Type="Self.buscon_sebab_akibat" Multiplicity="0..1" />
+          <End Role="buscon_progress" Type="Self.buscon_progress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon_sebab_akibat">
+              <PropertyRef Name="id_sebab_akibat" />
+            </Principal>
+            <Dependent Role="buscon_progress">
+              <PropertyRef Name="id_sebab_akibat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_detail">
+          <End Role="simo" Type="Self.simo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="simo_detail" Type="Self.simo_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="simo_detail">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_detail_berkas">
+          <End Role="simo_detail_berkas" Type="Self.simo_detail_berkas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="simo_detail_berkas_deskripsi" Type="Self.simo_detail_berkas_deskripsi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo_detail_berkas">
+              <PropertyRef Name="id_detail_berkas" />
+            </Principal>
+            <Dependent Role="simo_detail_berkas_deskripsi">
+              <PropertyRef Name="id_detail_berkas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_detail_pic_divisi">
+          <End Role="divisi" Type="Self.divisi" Multiplicity="0..1" />
+          <End Role="simo_detail_pic" Type="Self.simo_detail_pic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="divisi">
+              <PropertyRef Name="id_divisi" />
+            </Principal>
+            <Dependent Role="simo_detail_pic">
+              <PropertyRef Name="divisi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_detail_pic_simo_detail">
+          <End Role="simo_detail" Type="Self.simo_detail" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="simo_detail_pic" Type="Self.simo_detail_pic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo_detail">
+              <PropertyRef Name="id_detail" />
+            </Principal>
+            <Dependent Role="simo_detail_pic">
+              <PropertyRef Name="id_detail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_detail_pic_user">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="simo_detail_pic" Type="Self.simo_detail_pic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="simo_detail_pic">
+              <PropertyRef Name="pic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_detail_simo_detail_berkas">
+          <End Role="simo_detail" Type="Self.simo_detail" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="simo_detail_berkas" Type="Self.simo_detail_berkas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo_detail">
+              <PropertyRef Name="id_detail" />
+            </Principal>
+            <Dependent Role="simo_detail_berkas">
+              <PropertyRef Name="id_detail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_detail_status">
+          <End Role="status" Type="Self.status" Multiplicity="0..1" />
+          <End Role="simo_detail" Type="Self.simo_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="simo_detail">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_lanjutan_sebelum">
+          <End Role="simo" Type="Self.simo" Multiplicity="0..1" />
+          <End Role="simo1" Type="Self.simo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="simo1">
+              <PropertyRef Name="id_sebelum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_lanjutan_sesudah">
+          <End Role="simo" Type="Self.simo" Multiplicity="0..1" />
+          <End Role="simo1" Type="Self.simo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="simo1">
+              <PropertyRef Name="id_sesudah" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_simo_remind_date">
+          <End Role="simo" Type="Self.simo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="simo_remind_date" Type="Self.simo_remind_date" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="simo_remind_date">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_simo_remind_weekly">
+          <End Role="simo" Type="Self.simo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="simo_remind_weekly" Type="Self.simo_remind_weekly" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="simo_remind_weekly">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_user">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="simo" Type="Self.simo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="simo">
+              <PropertyRef Name="created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_atasan">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users1" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Users1">
+              <PropertyRef Name="level_parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_divisi">
+          <End Role="divisi" Type="Self.divisi" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="divisi">
+              <PropertyRef Name="id_divisi" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_divisi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_hirarki">
+          <End Role="hirarki" Type="Self.hirarki" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hirarki">
+              <PropertyRef Name="id_hirarki" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_hirarki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="mpmModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="buscon" EntityType="Self.buscon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="buscon_anggota" EntityType="Self.buscon_anggota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="buscon_judul" EntityType="Self.buscon_judul" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="buscon_kondisi" EntityType="Self.buscon_kondisi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="buscon_kondisi_berkas" EntityType="Self.buscon_kondisi_berkas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="buscon_kriteria_berkas" EntityType="Self.buscon_kriteria_berkas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="buscon_progress" EntityType="Self.buscon_progress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="buscon_progress_berkas" EntityType="Self.buscon_progress_berkas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="buscon_remind_once" EntityType="Self.buscon_remind_once" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="buscon_remind_weekly" EntityType="Self.buscon_remind_weekly" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="buscon_sebab_akibat" EntityType="Self.buscon_sebab_akibat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="divisi" EntityType="Self.divisi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hirarki" EntityType="Self.hirarki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="perusahaan" EntityType="Self.perusahaan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="review" EntityType="Self.review" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="simo" EntityType="Self.simo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="simo_detail" EntityType="Self.simo_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="simo_detail_berkas" EntityType="Self.simo_detail_berkas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="simo_detail_berkas_deskripsi" EntityType="Self.simo_detail_berkas_deskripsi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="simo_detail_pic" EntityType="Self.simo_detail_pic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="simo_remind_date" EntityType="Self.simo_remind_date" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="simo_remind_weekly" EntityType="Self.simo_remind_weekly" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_buscon_anggota_buscon" Association="Self.FK_buscon_anggota_buscon">
+            <End Role="buscon" EntitySet="buscon" />
+            <End Role="buscon_anggota" EntitySet="buscon_anggota" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_anggota_user" Association="Self.FK_buscon_anggota_user">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="buscon_anggota" EntitySet="buscon_anggota" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_created_by" Association="Self.FK_buscon_created_by">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="buscon" EntitySet="buscon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_ketua" Association="Self.FK_buscon_ketua">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="buscon" EntitySet="buscon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_kondisi_berkas" Association="Self.FK_buscon_kondisi_berkas">
+            <End Role="buscon_kondisi" EntitySet="buscon_kondisi" />
+            <End Role="buscon_kondisi_berkas" EntitySet="buscon_kondisi_berkas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_kondisi_buscon_judul" Association="Self.FK_buscon_kondisi_buscon_judul">
+            <End Role="buscon_judul" EntitySet="buscon_judul" />
+            <End Role="buscon_kondisi" EntitySet="buscon_kondisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_kriteria_buscon_kondisi" Association="Self.FK_buscon_kriteria_buscon_kondisi">
+            <End Role="buscon_kondisi" EntitySet="buscon_kondisi" />
+            <End Role="buscon_kriteria_berkas" EntitySet="buscon_kriteria_berkas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_remind_once_buscon" Association="Self.FK_buscon_remind_once_buscon">
+            <End Role="buscon" EntitySet="buscon" />
+            <End Role="buscon_remind_once" EntitySet="buscon_remind_once" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_remind_weekly_buscon" Association="Self.FK_buscon_remind_weekly_buscon">
+            <End Role="buscon" EntitySet="buscon" />
+            <End Role="buscon_remind_weekly" EntitySet="buscon_remind_weekly" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_review" Association="Self.FK_buscon_review">
+            <End Role="review" EntitySet="review" />
+            <End Role="buscon" EntitySet="buscon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserRoles_atasan" Association="Self.FK_dbo_UserRoles_atasan">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserRoles_dbo_divisi" Association="Self.FK_dbo_UserRoles_dbo_divisi">
+            <End Role="divisi" EntitySet="divisi" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserRoles_dbo_hirarki" Association="Self.FK_dbo_UserRoles_dbo_hirarki">
+            <End Role="hirarki" EntitySet="hirarki" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserRoles_dbo_Roles_RoleId" Association="Self.FK_dbo_UserRoles_dbo_Roles_RoleId">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserRoles_dbo_Users_UserId" Association="Self.FK_dbo_UserRoles_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hirarki_atasan" Association="Self.FK_hirarki_atasan">
+            <End Role="hirarki" EntitySet="hirarki" />
+            <End Role="hirarki1" EntitySet="hirarki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_judul_buscon" Association="Self.FK_judul_buscon">
+            <End Role="buscon" EntitySet="buscon" />
+            <End Role="buscon_judul" EntitySet="buscon_judul" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Perusahaan_buscon" Association="Self.FK_Perusahaan_buscon">
+            <End Role="perusahaan" EntitySet="perusahaan" />
+            <End Role="buscon" EntitySet="buscon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Perusahaan_simo" Association="Self.FK_Perusahaan_simo">
+            <End Role="perusahaan" EntitySet="perusahaan" />
+            <End Role="simo" EntitySet="simo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pic_buscon_user" Association="Self.FK_pic_buscon_user">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="buscon_sebab_akibat" EntitySet="buscon_sebab_akibat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_progress" Association="Self.FK_progress">
+            <End Role="buscon_progress" EntitySet="buscon_progress" />
+            <End Role="buscon_progress_berkas" EntitySet="buscon_progress_berkas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_progress_buscon_user" Association="Self.FK_progress_buscon_user">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="buscon_progress" EntitySet="buscon_progress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sebab_akibat" Association="Self.FK_sebab_akibat">
+            <End Role="buscon_sebab_akibat" EntitySet="buscon_sebab_akibat" />
+            <End Role="buscon_progress" EntitySet="buscon_progress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_detail" Association="Self.FK_simo_detail">
+            <End Role="simo" EntitySet="simo" />
+            <End Role="simo_detail" EntitySet="simo_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_detail_berkas" Association="Self.FK_simo_detail_berkas">
+            <End Role="simo_detail_berkas" EntitySet="simo_detail_berkas" />
+            <End Role="simo_detail_berkas_deskripsi" EntitySet="simo_detail_berkas_deskripsi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_detail_pic_divisi" Association="Self.FK_simo_detail_pic_divisi">
+            <End Role="divisi" EntitySet="divisi" />
+            <End Role="simo_detail_pic" EntitySet="simo_detail_pic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_detail_pic_simo_detail" Association="Self.FK_simo_detail_pic_simo_detail">
+            <End Role="simo_detail" EntitySet="simo_detail" />
+            <End Role="simo_detail_pic" EntitySet="simo_detail_pic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_detail_pic_user" Association="Self.FK_simo_detail_pic_user">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="simo_detail_pic" EntitySet="simo_detail_pic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_detail_simo_detail_berkas" Association="Self.FK_simo_detail_simo_detail_berkas">
+            <End Role="simo_detail" EntitySet="simo_detail" />
+            <End Role="simo_detail_berkas" EntitySet="simo_detail_berkas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_detail_status" Association="Self.FK_simo_detail_status">
+            <End Role="status" EntitySet="status" />
+            <End Role="simo_detail" EntitySet="simo_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_lanjutan_sebelum" Association="Self.FK_simo_lanjutan_sebelum">
+            <End Role="simo" EntitySet="simo" />
+            <End Role="simo1" EntitySet="simo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_lanjutan_sesudah" Association="Self.FK_simo_lanjutan_sesudah">
+            <End Role="simo" EntitySet="simo" />
+            <End Role="simo1" EntitySet="simo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_simo_remind_date" Association="Self.FK_simo_simo_remind_date">
+            <End Role="simo" EntitySet="simo" />
+            <End Role="simo_remind_date" EntitySet="simo_remind_date" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_simo_remind_weekly" Association="Self.FK_simo_simo_remind_weekly">
+            <End Role="simo" EntitySet="simo" />
+            <End Role="simo_remind_weekly" EntitySet="simo_remind_weekly" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_user" Association="Self.FK_simo_user">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="simo" EntitySet="simo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_atasan" Association="Self.FK_user_atasan">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Users1" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_divisi" Association="Self.FK_user_divisi">
+            <End Role="divisi" EntitySet="divisi" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_hirarki" Association="Self.FK_user_hirarki">
+            <End Role="hirarki" EntitySet="hirarki" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="mpmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="buscon">
+          <Key>
+            <PropertyRef Name="id_buscon" />
+          </Key>
+          <Property Name="id_buscon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="perusahaan" Type="Int32" />
+          <Property Name="review" Type="Int32" />
+          <Property Name="review_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="no_report_fra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tanggal" Type="DateTime" Precision="0" />
+          <Property Name="penugasan_start" Type="DateTime" Precision="0" />
+          <Property Name="penugasan_end" Type="DateTime" Precision="0" />
+          <Property Name="ketua_tim" Type="Int32" />
+          <Property Name="status_final" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="created_by" Type="Int32" />
+          <NavigationProperty Name="buscon_anggota" Relationship="Self.FK_buscon_anggota_buscon" FromRole="buscon" ToRole="buscon_anggota" />
+          <NavigationProperty Name="User" Relationship="Self.FK_buscon_created_by" FromRole="buscon" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_buscon_ketua" FromRole="buscon" ToRole="Users" />
+          <NavigationProperty Name="buscon_remind_once" Relationship="Self.FK_buscon_remind_once_buscon" FromRole="buscon" ToRole="buscon_remind_once" />
+          <NavigationProperty Name="buscon_remind_weekly" Relationship="Self.FK_buscon_remind_weekly_buscon" FromRole="buscon" ToRole="buscon_remind_weekly" />
+          <NavigationProperty Name="review1" Relationship="Self.FK_buscon_review" FromRole="buscon" ToRole="review" />
+          <NavigationProperty Name="buscon_judul" Relationship="Self.FK_judul_buscon" FromRole="buscon" ToRole="buscon_judul" />
+          <NavigationProperty Name="perusahaan1" Relationship="Self.FK_Perusahaan_buscon" FromRole="buscon" ToRole="perusahaan" />
+        </EntityType>
+        <EntityType Name="buscon_anggota">
+          <Key>
+            <PropertyRef Name="id_anggota_buscon" />
+          </Key>
+          <Property Name="id_anggota_buscon" Type="Int32" Nullable="false" />
+          <Property Name="id_buscon" Type="Int32" />
+          <Property Name="user" Type="Int32" />
+          <NavigationProperty Name="buscon" Relationship="Self.FK_buscon_anggota_buscon" FromRole="buscon_anggota" ToRole="buscon" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_buscon_anggota_user" FromRole="buscon_anggota" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="buscon_judul">
+          <Key>
+            <PropertyRef Name="id_judul_buscon" />
+          </Key>
+          <Property Name="id_judul_buscon" Type="Int32" Nullable="false" />
+          <Property Name="id_buscon" Type="Int32" />
+          <Property Name="judul" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="buscon" Relationship="Self.FK_judul_buscon" FromRole="buscon_judul" ToRole="buscon" />
+          <NavigationProperty Name="buscon_kondisi" Relationship="Self.FK_buscon_kondisi_buscon_judul" FromRole="buscon_judul" ToRole="buscon_kondisi" />
+        </EntityType>
+        <EntityType Name="buscon_kondisi">
+          <Key>
+            <PropertyRef Name="id_kondisi" />
+          </Key>
+          <Property Name="id_kondisi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kondisi" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="kriteria" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_judul_buscon" Type="Int32" />
+          <NavigationProperty Name="buscon_judul" Relationship="Self.FK_buscon_kondisi_buscon_judul" FromRole="buscon_kondisi" ToRole="buscon_judul" />
+          <NavigationProperty Name="buscon_kondisi_berkas" Relationship="Self.FK_buscon_kondisi_berkas" FromRole="buscon_kondisi" ToRole="buscon_kondisi_berkas" />
+          <NavigationProperty Name="buscon_kriteria_berkas" Relationship="Self.FK_buscon_kriteria_buscon_kondisi" FromRole="buscon_kondisi" ToRole="buscon_kriteria_berkas" />
+        </EntityType>
+        <EntityType Name="buscon_kondisi_berkas">
+          <Key>
+            <PropertyRef Name="id_kondisi_berkas" />
+          </Key>
+          <Property Name="id_kondisi_berkas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_kondisi" Type="Int32" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="buscon_kondisi" Relationship="Self.FK_buscon_kondisi_berkas" FromRole="buscon_kondisi_berkas" ToRole="buscon_kondisi" />
+        </EntityType>
+        <EntityType Name="buscon_kriteria_berkas">
+          <Key>
+            <PropertyRef Name="id_kriteria" />
+          </Key>
+          <Property Name="id_kriteria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_kondisi" Type="Int32" />
+          <NavigationProperty Name="buscon_kondisi" Relationship="Self.FK_buscon_kriteria_buscon_kondisi" FromRole="buscon_kriteria_berkas" ToRole="buscon_kondisi" />
+        </EntityType>
+        <EntityType Name="buscon_progress">
+          <Key>
+            <PropertyRef Name="id_progress" />
+          </Key>
+          <Property Name="id_progress" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tanggal" Type="DateTime" Precision="0" />
+          <Property Name="progress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="deadline" Type="DateTime" Precision="0" />
+          <Property Name="modify_by" Type="Int32" />
+          <Property Name="id_sebab_akibat" Type="Int32" />
+          <NavigationProperty Name="buscon_progress_berkas" Relationship="Self.FK_progress" FromRole="buscon_progress" ToRole="buscon_progress_berkas" />
+          <NavigationProperty Name="User" Relationship="Self.FK_progress_buscon_user" FromRole="buscon_progress" ToRole="Users" />
+          <NavigationProperty Name="buscon_sebab_akibat" Relationship="Self.FK_sebab_akibat" FromRole="buscon_progress" ToRole="buscon_sebab_akibat" />
+        </EntityType>
+        <EntityType Name="buscon_progress_berkas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_progress" Type="Int32" />
+          <NavigationProperty Name="buscon_progress" Relationship="Self.FK_progress" FromRole="buscon_progress_berkas" ToRole="buscon_progress" />
+        </EntityType>
+        <EntityType Name="buscon_remind_once">
+          <Key>
+            <PropertyRef Name="id_one_time" />
+          </Key>
+          <Property Name="id_one_time" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_buscon" Type="Int32" />
+          <Property Name="tanggal" Type="DateTime" Precision="0" />
+          <Property Name="on_off" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="buscon" Relationship="Self.FK_buscon_remind_once_buscon" FromRole="buscon_remind_once" ToRole="buscon" />
+        </EntityType>
+        <EntityType Name="buscon_remind_weekly">
+          <Key>
+            <PropertyRef Name="id_weekly" />
+          </Key>
+          <Property Name="id_weekly" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_buscon" Type="Int32" />
+          <Property Name="senin" Type="Boolean" Nullable="false" />
+          <Property Name="selasa" Type="Boolean" Nullable="false" />
+          <Property Name="rabu" Type="Boolean" Nullable="false" />
+          <Property Name="kamis" Type="Boolean" Nullable="false" />
+          <Property Name="jumat" Type="Boolean" Nullable="false" />
+          <Property Name="sabtu" Type="Boolean" Nullable="false" />
+          <Property Name="on_off" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="buscon" Relationship="Self.FK_buscon_remind_weekly_buscon" FromRole="buscon_remind_weekly" ToRole="buscon" />
+        </EntityType>
+        <EntityType Name="buscon_sebab_akibat">
+          <Key>
+            <PropertyRef Name="id_sebab_akibat" />
+          </Key>
+          <Property Name="id_sebab_akibat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sebab" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="akibat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="rekomendasi" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="action_plant_mgmt" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="deadline" Type="DateTime" Precision="0" />
+          <Property Name="risk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status_close" Type="Boolean" Nullable="false" />
+          <Property Name="pic" Type="Int32" />
+          <NavigationProperty Name="buscon_progress" Relationship="Self.FK_sebab_akibat" FromRole="buscon_sebab_akibat" ToRole="buscon_progress" />
+          <NavigationProperty Name="User" Relationship="Self.FK_pic_buscon_user" FromRole="buscon_sebab_akibat" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="divisi">
+          <Key>
+            <PropertyRef Name="id_divisi" />
+          </Key>
+          <Property Name="id_divisi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kode_divisi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nama_divisi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_dbo_UserRoles_dbo_divisi" FromRole="divisi" ToRole="UserRoles" />
+          <NavigationProperty Name="simo_detail_pic" Relationship="Self.FK_simo_detail_pic_divisi" FromRole="divisi" ToRole="simo_detail_pic" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_user_divisi" FromRole="divisi" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="hirarki">
+          <Key>
+            <PropertyRef Name="id_hirarki" />
+          </Key>
+          <Property Name="id_hirarki" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="level" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="level_parent" Type="Int32" />
+          <Property Name="non_overdue" Type="Boolean" Nullable="false" />
+          <Property Name="overdue1_30" Type="Boolean" Nullable="false" />
+          <Property Name="overdue30_" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_dbo_UserRoles_dbo_hirarki" FromRole="hirarki" ToRole="UserRoles" />
+          <NavigationProperty Name="hirarki1" Relationship="Self.FK_hirarki_atasan" FromRole="hirarki" ToRole="hirarki1" />
+          <NavigationProperty Name="hirarki2" Relationship="Self.FK_hirarki_atasan" FromRole="hirarki1" ToRole="hirarki" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_user_hirarki" FromRole="hirarki" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="perusahaan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nama" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="buscons" Relationship="Self.FK_Perusahaan_buscon" FromRole="perusahaan" ToRole="buscon" />
+          <NavigationProperty Name="simoes" Relationship="Self.FK_Perusahaan_simo" FromRole="perusahaan" ToRole="simo" />
+        </EntityType>
+        <EntityType Name="review">
+          <Key>
+            <PropertyRef Name="id_review" />
+          </Key>
+          <Property Name="id_review" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nama_review" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="buscons" Relationship="Self.FK_buscon_review" FromRole="review" ToRole="buscon" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_dbo_UserRoles_dbo_Roles_RoleId" FromRole="Roles" ToRole="UserRoles" />
+        </EntityType>
+        <EntityType Name="simo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="review_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="no_review" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tanggal" Type="DateTime" Precision="3" />
+          <Property Name="tempat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="peserta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="jam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="created_by" Type="Int32" />
+          <Property Name="id_perusahaan" Type="Int32" />
+          <Property Name="status_lanjut" Type="Boolean" />
+          <Property Name="id_sebelum" Type="Int32" />
+          <Property Name="id_sesudah" Type="Int32" />
+          <NavigationProperty Name="perusahaan" Relationship="Self.FK_Perusahaan_simo" FromRole="simo" ToRole="perusahaan" />
+          <NavigationProperty Name="simo_detail" Relationship="Self.FK_simo_detail" FromRole="simo" ToRole="simo_detail" />
+          <NavigationProperty Name="simo1" Relationship="Self.FK_simo_lanjutan_sebelum" FromRole="simo" ToRole="simo1" />
+          <NavigationProperty Name="simo2" Relationship="Self.FK_simo_lanjutan_sebelum" FromRole="simo1" ToRole="simo" />
+          <NavigationProperty Name="simo11" Relationship="Self.FK_simo_lanjutan_sesudah" FromRole="simo" ToRole="simo1" />
+          <NavigationProperty Name="simo3" Relationship="Self.FK_simo_lanjutan_sesudah" FromRole="simo1" ToRole="simo" />
+          <NavigationProperty Name="simo_remind_date" Relationship="Self.FK_simo_simo_remind_date" FromRole="simo" ToRole="simo_remind_date" />
+          <NavigationProperty Name="simo_remind_weekly" Relationship="Self.FK_simo_simo_remind_weekly" FromRole="simo" ToRole="simo_remind_weekly" />
+          <NavigationProperty Name="User" Relationship="Self.FK_simo_user" FromRole="simo" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="simo_detail">
+          <Key>
+            <PropertyRef Name="id_detail" />
+          </Key>
+          <Property Name="id_detail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" />
+          <Property Name="tema" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="deskripsi" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="divisi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="deadline" Type="DateTime" Precision="0" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="last_update" Type="DateTime" Precision="0" />
+          <Property Name="is_close" Type="Boolean" />
+          <NavigationProperty Name="simo" Relationship="Self.FK_simo_detail" FromRole="simo_detail" ToRole="simo" />
+          <NavigationProperty Name="simo_detail_pic" Relationship="Self.FK_simo_detail_pic_simo_detail" FromRole="simo_detail" ToRole="simo_detail_pic" />
+          <NavigationProperty Name="simo_detail_berkas" Relationship="Self.FK_simo_detail_simo_detail_berkas" FromRole="simo_detail" ToRole="simo_detail_berkas" />
+          <NavigationProperty Name="status1" Relationship="Self.FK_simo_detail_status" FromRole="simo_detail" ToRole="status" />
+        </EntityType>
+        <EntityType Name="simo_detail_berkas">
+          <Key>
+            <PropertyRef Name="id_detail_berkas" />
+          </Key>
+          <Property Name="id_detail_berkas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="waktu_simpan" Type="DateTime" Precision="3" />
+          <Property Name="berkas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_detail" Type="Int32" />
+          <Property Name="progress" Type="String" MaxLength="125" FixedLength="false" Unicode="false" />
+          <Property Name="modify_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="simo_detail" Relationship="Self.FK_simo_detail_simo_detail_berkas" FromRole="simo_detail_berkas" ToRole="simo_detail" />
+          <NavigationProperty Name="simo_detail_berkas_deskripsi" Relationship="Self.FK_simo_detail_berkas" FromRole="simo_detail_berkas" ToRole="simo_detail_berkas_deskripsi" />
+        </EntityType>
+        <EntityType Name="simo_detail_berkas_deskripsi">
+          <Key>
+            <PropertyRef Name="Id_berkas" />
+          </Key>
+          <Property Name="Id_berkas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_detail_berkas" Type="Int32" />
+          <NavigationProperty Name="simo_detail_berkas" Relationship="Self.FK_simo_detail_berkas" FromRole="simo_detail_berkas_deskripsi" ToRole="simo_detail_berkas" />
+        </EntityType>
+        <EntityType Name="simo_detail_pic">
+          <Key>
+            <PropertyRef Name="id_detail_pic" />
+          </Key>
+          <Property Name="id_detail_pic" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_detail" Type="Int32" />
+          <Property Name="divisi" Type="Int32" />
+          <Property Name="pic" Type="Int32" />
+          <Property Name="npk" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="divisi1" Relationship="Self.FK_simo_detail_pic_divisi" FromRole="simo_detail_pic" ToRole="divisi" />
+          <NavigationProperty Name="simo_detail" Relationship="Self.FK_simo_detail_pic_simo_detail" FromRole="simo_detail_pic" ToRole="simo_detail" />
+          <NavigationProperty Name="User" Relationship="Self.FK_simo_detail_pic_user" FromRole="simo_detail_pic" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="simo_remind_date">
+          <Key>
+            <PropertyRef Name="id_one_time" />
+          </Key>
+          <Property Name="id_one_time" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" />
+          <Property Name="tanggal" Type="DateTime" Precision="0" />
+          <Property Name="on_off" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="simo" Relationship="Self.FK_simo_simo_remind_date" FromRole="simo_remind_date" ToRole="simo" />
+        </EntityType>
+        <EntityType Name="simo_remind_weekly">
+          <Key>
+            <PropertyRef Name="id_weekly" />
+          </Key>
+          <Property Name="id_weekly" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" />
+          <Property Name="senin" Type="Boolean" Nullable="false" />
+          <Property Name="selasa" Type="Boolean" Nullable="false" />
+          <Property Name="rabu" Type="Boolean" Nullable="false" />
+          <Property Name="kamis" Type="Boolean" Nullable="false" />
+          <Property Name="jumat" Type="Boolean" Nullable="false" />
+          <Property Name="sabtu" Type="Boolean" Nullable="false" />
+          <Property Name="on_off" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="simo" Relationship="Self.FK_simo_simo_remind_weekly" FromRole="simo_remind_weekly" ToRole="simo" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status_reminder" Type="Boolean" />
+          <NavigationProperty Name="simo_detail" Relationship="Self.FK_simo_detail_status" FromRole="status" ToRole="simo_detail" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="idUserRoles" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="idUserRoles" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_hirarki" Type="Int32" />
+          <Property Name="id_divisi" Type="Int32" />
+          <Property Name="idRoleAtasan" Type="Int32" />
+          <NavigationProperty Name="divisi" Relationship="Self.FK_dbo_UserRoles_dbo_divisi" FromRole="UserRoles" ToRole="divisi" />
+          <NavigationProperty Name="hirarki" Relationship="Self.FK_dbo_UserRoles_dbo_hirarki" FromRole="UserRoles" ToRole="hirarki" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_dbo_UserRoles_dbo_Roles_RoleId" FromRole="UserRoles" ToRole="Roles" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_UserRoles_atasan" FromRole="UserRoles" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_dbo_UserRoles_dbo_Users_UserId" FromRole="UserRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="level_parent" Type="Int32" />
+          <Property Name="id_divisi" Type="Int32" />
+          <Property Name="id_hirarki" Type="Int32" />
+          <Property Name="alias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="buscons" Relationship="Self.FK_buscon_created_by" FromRole="Users" ToRole="buscon" />
+          <NavigationProperty Name="buscons1" Relationship="Self.FK_buscon_ketua" FromRole="Users" ToRole="buscon" />
+          <NavigationProperty Name="buscon_anggota" Relationship="Self.FK_buscon_anggota_user" FromRole="Users" ToRole="buscon_anggota" />
+          <NavigationProperty Name="buscon_progress" Relationship="Self.FK_progress_buscon_user" FromRole="Users" ToRole="buscon_progress" />
+          <NavigationProperty Name="buscon_sebab_akibat" Relationship="Self.FK_pic_buscon_user" FromRole="Users" ToRole="buscon_sebab_akibat" />
+          <NavigationProperty Name="divisi" Relationship="Self.FK_user_divisi" FromRole="Users" ToRole="divisi" />
+          <NavigationProperty Name="hirarki" Relationship="Self.FK_user_hirarki" FromRole="Users" ToRole="hirarki" />
+          <NavigationProperty Name="simoes" Relationship="Self.FK_simo_user" FromRole="Users" ToRole="simo" />
+          <NavigationProperty Name="simo_detail_pic" Relationship="Self.FK_simo_detail_pic_user" FromRole="Users" ToRole="simo_detail_pic" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_dbo_UserRoles_atasan" FromRole="Users" ToRole="UserRoles" />
+          <NavigationProperty Name="UserRoles1" Relationship="Self.FK_dbo_UserRoles_dbo_Users_UserId" FromRole="Users" ToRole="UserRoles" />
+          <NavigationProperty Name="Users1" Relationship="Self.FK_user_atasan" FromRole="Users" ToRole="Users1" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_user_atasan" FromRole="Users1" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_buscon_anggota_buscon">
+          <End Role="buscon" Type="Self.buscon" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_anggota" Type="Self.buscon_anggota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon">
+              <PropertyRef Name="id_buscon" />
+            </Principal>
+            <Dependent Role="buscon_anggota">
+              <PropertyRef Name="id_buscon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_created_by">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="buscon" Type="Self.buscon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="buscon">
+              <PropertyRef Name="created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_ketua">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="buscon" Type="Self.buscon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="buscon">
+              <PropertyRef Name="ketua_tim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_remind_once_buscon">
+          <End Role="buscon" Type="Self.buscon" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_remind_once" Type="Self.buscon_remind_once" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon">
+              <PropertyRef Name="id_buscon" />
+            </Principal>
+            <Dependent Role="buscon_remind_once">
+              <PropertyRef Name="id_buscon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_remind_weekly_buscon">
+          <End Role="buscon" Type="Self.buscon" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_remind_weekly" Type="Self.buscon_remind_weekly" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon">
+              <PropertyRef Name="id_buscon" />
+            </Principal>
+            <Dependent Role="buscon_remind_weekly">
+              <PropertyRef Name="id_buscon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_review">
+          <End Role="review" Type="Self.review" Multiplicity="0..1" />
+          <End Role="buscon" Type="Self.buscon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="review">
+              <PropertyRef Name="id_review" />
+            </Principal>
+            <Dependent Role="buscon">
+              <PropertyRef Name="review" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_judul_buscon">
+          <End Role="buscon" Type="Self.buscon" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_judul" Type="Self.buscon_judul" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="buscon">
+              <PropertyRef Name="id_buscon" />
+            </Principal>
+            <Dependent Role="buscon_judul">
+              <PropertyRef Name="id_judul_buscon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Perusahaan_buscon">
+          <End Role="perusahaan" Type="Self.perusahaan" Multiplicity="0..1" />
+          <End Role="buscon" Type="Self.buscon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="perusahaan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="buscon">
+              <PropertyRef Name="perusahaan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_anggota_user">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="buscon_anggota" Type="Self.buscon_anggota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="buscon_anggota">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_kondisi_buscon_judul">
+          <End Role="buscon_judul" Type="Self.buscon_judul" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_kondisi" Type="Self.buscon_kondisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon_judul">
+              <PropertyRef Name="id_judul_buscon" />
+            </Principal>
+            <Dependent Role="buscon_kondisi">
+              <PropertyRef Name="id_judul_buscon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_kondisi_berkas">
+          <End Role="buscon_kondisi" Type="Self.buscon_kondisi" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_kondisi_berkas" Type="Self.buscon_kondisi_berkas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon_kondisi">
+              <PropertyRef Name="id_kondisi" />
+            </Principal>
+            <Dependent Role="buscon_kondisi_berkas">
+              <PropertyRef Name="id_kondisi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_buscon_kriteria_buscon_kondisi">
+          <End Role="buscon_kondisi" Type="Self.buscon_kondisi" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_kriteria_berkas" Type="Self.buscon_kriteria_berkas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon_kondisi">
+              <PropertyRef Name="id_kondisi" />
+            </Principal>
+            <Dependent Role="buscon_kriteria_berkas">
+              <PropertyRef Name="id_kondisi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_progress">
+          <End Role="buscon_progress" Type="Self.buscon_progress" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="buscon_progress_berkas" Type="Self.buscon_progress_berkas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon_progress">
+              <PropertyRef Name="id_progress" />
+            </Principal>
+            <Dependent Role="buscon_progress_berkas">
+              <PropertyRef Name="id_progress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_progress_buscon_user">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="buscon_progress" Type="Self.buscon_progress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="buscon_progress">
+              <PropertyRef Name="modify_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sebab_akibat">
+          <End Role="buscon_sebab_akibat" Type="Self.buscon_sebab_akibat" Multiplicity="0..1" />
+          <End Role="buscon_progress" Type="Self.buscon_progress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buscon_sebab_akibat">
+              <PropertyRef Name="id_sebab_akibat" />
+            </Principal>
+            <Dependent Role="buscon_progress">
+              <PropertyRef Name="id_sebab_akibat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pic_buscon_user">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="buscon_sebab_akibat" Type="Self.buscon_sebab_akibat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="buscon_sebab_akibat">
+              <PropertyRef Name="pic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserRoles_dbo_divisi">
+          <End Role="divisi" Type="Self.divisi" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="divisi">
+              <PropertyRef Name="id_divisi" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="id_divisi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_detail_pic_divisi">
+          <End Role="divisi" Type="Self.divisi" Multiplicity="0..1" />
+          <End Role="simo_detail_pic" Type="Self.simo_detail_pic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="divisi">
+              <PropertyRef Name="id_divisi" />
+            </Principal>
+            <Dependent Role="simo_detail_pic">
+              <PropertyRef Name="divisi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_divisi">
+          <End Role="divisi" Type="Self.divisi" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="divisi">
+              <PropertyRef Name="id_divisi" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_divisi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserRoles_dbo_hirarki">
+          <End Role="hirarki" Type="Self.hirarki" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hirarki">
+              <PropertyRef Name="id_hirarki" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="id_hirarki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hirarki_atasan">
+          <End Role="hirarki" Type="Self.hirarki" Multiplicity="0..1" />
+          <End Role="hirarki1" Type="Self.hirarki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hirarki">
+              <PropertyRef Name="id_hirarki" />
+            </Principal>
+            <Dependent Role="hirarki1">
+              <PropertyRef Name="level_parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_hirarki">
+          <End Role="hirarki" Type="Self.hirarki" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hirarki">
+              <PropertyRef Name="id_hirarki" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="id_hirarki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Perusahaan_simo">
+          <End Role="perusahaan" Type="Self.perusahaan" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="simo" Type="Self.simo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="perusahaan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="simo">
+              <PropertyRef Name="id_perusahaan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserRoles_dbo_Roles_RoleId">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_detail">
+          <End Role="simo" Type="Self.simo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="simo_detail" Type="Self.simo_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="simo_detail">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_lanjutan_sebelum">
+          <End Role="simo" Type="Self.simo" Multiplicity="0..1" />
+          <End Role="simo1" Type="Self.simo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="simo1">
+              <PropertyRef Name="id_sebelum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_lanjutan_sesudah">
+          <End Role="simo" Type="Self.simo" Multiplicity="0..1" />
+          <End Role="simo1" Type="Self.simo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="simo1">
+              <PropertyRef Name="id_sesudah" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_simo_remind_date">
+          <End Role="simo" Type="Self.simo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="simo_remind_date" Type="Self.simo_remind_date" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="simo_remind_date">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_simo_remind_weekly">
+          <End Role="simo" Type="Self.simo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="simo_remind_weekly" Type="Self.simo_remind_weekly" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="simo_remind_weekly">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_user">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="simo" Type="Self.simo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="simo">
+              <PropertyRef Name="created_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_detail_pic_simo_detail">
+          <End Role="simo_detail" Type="Self.simo_detail" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="simo_detail_pic" Type="Self.simo_detail_pic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo_detail">
+              <PropertyRef Name="id_detail" />
+            </Principal>
+            <Dependent Role="simo_detail_pic">
+              <PropertyRef Name="id_detail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_detail_simo_detail_berkas">
+          <End Role="simo_detail" Type="Self.simo_detail" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="simo_detail_berkas" Type="Self.simo_detail_berkas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo_detail">
+              <PropertyRef Name="id_detail" />
+            </Principal>
+            <Dependent Role="simo_detail_berkas">
+              <PropertyRef Name="id_detail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_detail_status">
+          <End Role="status" Type="Self.status" Multiplicity="0..1" />
+          <End Role="simo_detail" Type="Self.simo_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="simo_detail">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_detail_berkas">
+          <End Role="simo_detail_berkas" Type="Self.simo_detail_berkas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="simo_detail_berkas_deskripsi" Type="Self.simo_detail_berkas_deskripsi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="simo_detail_berkas">
+              <PropertyRef Name="id_detail_berkas" />
+            </Principal>
+            <Dependent Role="simo_detail_berkas_deskripsi">
+              <PropertyRef Name="id_detail_berkas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_simo_detail_pic_user">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="simo_detail_pic" Type="Self.simo_detail_pic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="simo_detail_pic">
+              <PropertyRef Name="pic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserRoles_atasan">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="idRoleAtasan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_UserRoles_dbo_Users_UserId">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_atasan">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Users1" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Users1">
+              <PropertyRef Name="level_parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="mpmEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="buscons" EntityType="Self.buscon" />
+          <EntitySet Name="buscon_anggota" EntityType="Self.buscon_anggota" />
+          <EntitySet Name="buscon_judul" EntityType="Self.buscon_judul" />
+          <EntitySet Name="buscon_kondisi" EntityType="Self.buscon_kondisi" />
+          <EntitySet Name="buscon_kondisi_berkas" EntityType="Self.buscon_kondisi_berkas" />
+          <EntitySet Name="buscon_kriteria_berkas" EntityType="Self.buscon_kriteria_berkas" />
+          <EntitySet Name="buscon_progress" EntityType="Self.buscon_progress" />
+          <EntitySet Name="buscon_progress_berkas" EntityType="Self.buscon_progress_berkas" />
+          <EntitySet Name="buscon_remind_once" EntityType="Self.buscon_remind_once" />
+          <EntitySet Name="buscon_remind_weekly" EntityType="Self.buscon_remind_weekly" />
+          <EntitySet Name="buscon_sebab_akibat" EntityType="Self.buscon_sebab_akibat" />
+          <EntitySet Name="divisis" EntityType="Self.divisi" />
+          <EntitySet Name="hirarkis" EntityType="Self.hirarki" />
+          <EntitySet Name="perusahaans" EntityType="Self.perusahaan" />
+          <EntitySet Name="reviews" EntityType="Self.review" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="simoes" EntityType="Self.simo" />
+          <EntitySet Name="simo_detail" EntityType="Self.simo_detail" />
+          <EntitySet Name="simo_detail_berkas" EntityType="Self.simo_detail_berkas" />
+          <EntitySet Name="simo_detail_berkas_deskripsi" EntityType="Self.simo_detail_berkas_deskripsi" />
+          <EntitySet Name="simo_detail_pic" EntityType="Self.simo_detail_pic" />
+          <EntitySet Name="simo_remind_date" EntityType="Self.simo_remind_date" />
+          <EntitySet Name="simo_remind_weekly" EntityType="Self.simo_remind_weekly" />
+          <EntitySet Name="status" EntityType="Self.status" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_buscon_anggota_buscon" Association="Self.FK_buscon_anggota_buscon">
+            <End Role="buscon" EntitySet="buscons" />
+            <End Role="buscon_anggota" EntitySet="buscon_anggota" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_created_by" Association="Self.FK_buscon_created_by">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="buscon" EntitySet="buscons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_ketua" Association="Self.FK_buscon_ketua">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="buscon" EntitySet="buscons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_remind_once_buscon" Association="Self.FK_buscon_remind_once_buscon">
+            <End Role="buscon" EntitySet="buscons" />
+            <End Role="buscon_remind_once" EntitySet="buscon_remind_once" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_remind_weekly_buscon" Association="Self.FK_buscon_remind_weekly_buscon">
+            <End Role="buscon" EntitySet="buscons" />
+            <End Role="buscon_remind_weekly" EntitySet="buscon_remind_weekly" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_review" Association="Self.FK_buscon_review">
+            <End Role="review" EntitySet="reviews" />
+            <End Role="buscon" EntitySet="buscons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_judul_buscon" Association="Self.FK_judul_buscon">
+            <End Role="buscon" EntitySet="buscons" />
+            <End Role="buscon_judul" EntitySet="buscon_judul" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Perusahaan_buscon" Association="Self.FK_Perusahaan_buscon">
+            <End Role="perusahaan" EntitySet="perusahaans" />
+            <End Role="buscon" EntitySet="buscons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_anggota_user" Association="Self.FK_buscon_anggota_user">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="buscon_anggota" EntitySet="buscon_anggota" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_kondisi_buscon_judul" Association="Self.FK_buscon_kondisi_buscon_judul">
+            <End Role="buscon_judul" EntitySet="buscon_judul" />
+            <End Role="buscon_kondisi" EntitySet="buscon_kondisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_kondisi_berkas" Association="Self.FK_buscon_kondisi_berkas">
+            <End Role="buscon_kondisi" EntitySet="buscon_kondisi" />
+            <End Role="buscon_kondisi_berkas" EntitySet="buscon_kondisi_berkas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_buscon_kriteria_buscon_kondisi" Association="Self.FK_buscon_kriteria_buscon_kondisi">
+            <End Role="buscon_kondisi" EntitySet="buscon_kondisi" />
+            <End Role="buscon_kriteria_berkas" EntitySet="buscon_kriteria_berkas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_progress" Association="Self.FK_progress">
+            <End Role="buscon_progress" EntitySet="buscon_progress" />
+            <End Role="buscon_progress_berkas" EntitySet="buscon_progress_berkas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_progress_buscon_user" Association="Self.FK_progress_buscon_user">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="buscon_progress" EntitySet="buscon_progress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sebab_akibat" Association="Self.FK_sebab_akibat">
+            <End Role="buscon_sebab_akibat" EntitySet="buscon_sebab_akibat" />
+            <End Role="buscon_progress" EntitySet="buscon_progress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pic_buscon_user" Association="Self.FK_pic_buscon_user">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="buscon_sebab_akibat" EntitySet="buscon_sebab_akibat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserRoles_dbo_divisi" Association="Self.FK_dbo_UserRoles_dbo_divisi">
+            <End Role="divisi" EntitySet="divisis" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_detail_pic_divisi" Association="Self.FK_simo_detail_pic_divisi">
+            <End Role="divisi" EntitySet="divisis" />
+            <End Role="simo_detail_pic" EntitySet="simo_detail_pic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_divisi" Association="Self.FK_user_divisi">
+            <End Role="divisi" EntitySet="divisis" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserRoles_dbo_hirarki" Association="Self.FK_dbo_UserRoles_dbo_hirarki">
+            <End Role="hirarki" EntitySet="hirarkis" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hirarki_atasan" Association="Self.FK_hirarki_atasan">
+            <End Role="hirarki" EntitySet="hirarkis" />
+            <End Role="hirarki1" EntitySet="hirarkis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_hirarki" Association="Self.FK_user_hirarki">
+            <End Role="hirarki" EntitySet="hirarkis" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Perusahaan_simo" Association="Self.FK_Perusahaan_simo">
+            <End Role="perusahaan" EntitySet="perusahaans" />
+            <End Role="simo" EntitySet="simoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserRoles_dbo_Roles_RoleId" Association="Self.FK_dbo_UserRoles_dbo_Roles_RoleId">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_detail" Association="Self.FK_simo_detail">
+            <End Role="simo" EntitySet="simoes" />
+            <End Role="simo_detail" EntitySet="simo_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_lanjutan_sebelum" Association="Self.FK_simo_lanjutan_sebelum">
+            <End Role="simo" EntitySet="simoes" />
+            <End Role="simo1" EntitySet="simoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_lanjutan_sesudah" Association="Self.FK_simo_lanjutan_sesudah">
+            <End Role="simo" EntitySet="simoes" />
+            <End Role="simo1" EntitySet="simoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_simo_remind_date" Association="Self.FK_simo_simo_remind_date">
+            <End Role="simo" EntitySet="simoes" />
+            <End Role="simo_remind_date" EntitySet="simo_remind_date" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_simo_remind_weekly" Association="Self.FK_simo_simo_remind_weekly">
+            <End Role="simo" EntitySet="simoes" />
+            <End Role="simo_remind_weekly" EntitySet="simo_remind_weekly" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_user" Association="Self.FK_simo_user">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="simo" EntitySet="simoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_detail_pic_simo_detail" Association="Self.FK_simo_detail_pic_simo_detail">
+            <End Role="simo_detail" EntitySet="simo_detail" />
+            <End Role="simo_detail_pic" EntitySet="simo_detail_pic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_detail_simo_detail_berkas" Association="Self.FK_simo_detail_simo_detail_berkas">
+            <End Role="simo_detail" EntitySet="simo_detail" />
+            <End Role="simo_detail_berkas" EntitySet="simo_detail_berkas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_detail_status" Association="Self.FK_simo_detail_status">
+            <End Role="status" EntitySet="status" />
+            <End Role="simo_detail" EntitySet="simo_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_detail_berkas" Association="Self.FK_simo_detail_berkas">
+            <End Role="simo_detail_berkas" EntitySet="simo_detail_berkas" />
+            <End Role="simo_detail_berkas_deskripsi" EntitySet="simo_detail_berkas_deskripsi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_simo_detail_pic_user" Association="Self.FK_simo_detail_pic_user">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="simo_detail_pic" EntitySet="simo_detail_pic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserRoles_atasan" Association="Self.FK_dbo_UserRoles_atasan">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_UserRoles_dbo_Users_UserId" Association="Self.FK_dbo_UserRoles_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_atasan" Association="Self.FK_user_atasan">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Users1" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="mpmModelStoreContainer" CdmEntityContainer="mpmEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="mpmModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="buscons">
+            <EntityTypeMapping TypeName="mpmModel.buscon">
+              <MappingFragment StoreEntitySet="buscon">
+                <ScalarProperty Name="id_buscon" ColumnName="id_buscon" />
+                <ScalarProperty Name="perusahaan" ColumnName="perusahaan" />
+                <ScalarProperty Name="review" ColumnName="review" />
+                <ScalarProperty Name="review_name" ColumnName="review_name" />
+                <ScalarProperty Name="no_report_fra" ColumnName="no_report_fra" />
+                <ScalarProperty Name="tanggal" ColumnName="tanggal" />
+                <ScalarProperty Name="penugasan_start" ColumnName="penugasan_start" />
+                <ScalarProperty Name="penugasan_end" ColumnName="penugasan_end" />
+                <ScalarProperty Name="ketua_tim" ColumnName="ketua_tim" />
+                <ScalarProperty Name="status_final" ColumnName="status_final" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="buscon_anggota">
+            <EntityTypeMapping TypeName="mpmModel.buscon_anggota">
+              <MappingFragment StoreEntitySet="buscon_anggota">
+                <ScalarProperty Name="id_anggota_buscon" ColumnName="id_anggota_buscon" />
+                <ScalarProperty Name="id_buscon" ColumnName="id_buscon" />
+                <ScalarProperty Name="user" ColumnName="user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="buscon_judul">
+            <EntityTypeMapping TypeName="mpmModel.buscon_judul">
+              <MappingFragment StoreEntitySet="buscon_judul">
+                <ScalarProperty Name="id_judul_buscon" ColumnName="id_judul_buscon" />
+                <ScalarProperty Name="id_buscon" ColumnName="id_buscon" />
+                <ScalarProperty Name="judul" ColumnName="judul" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="buscon_kondisi">
+            <EntityTypeMapping TypeName="mpmModel.buscon_kondisi">
+              <MappingFragment StoreEntitySet="buscon_kondisi">
+                <ScalarProperty Name="id_kondisi" ColumnName="id_kondisi" />
+                <ScalarProperty Name="kondisi" ColumnName="kondisi" />
+                <ScalarProperty Name="kriteria" ColumnName="kriteria" />
+                <ScalarProperty Name="id_judul_buscon" ColumnName="id_judul_buscon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="buscon_kondisi_berkas">
+            <EntityTypeMapping TypeName="mpmModel.buscon_kondisi_berkas">
+              <MappingFragment StoreEntitySet="buscon_kondisi_berkas">
+                <ScalarProperty Name="id_kondisi_berkas" ColumnName="id_kondisi_berkas" />
+                <ScalarProperty Name="id_kondisi" ColumnName="id_kondisi" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="buscon_kriteria_berkas">
+            <EntityTypeMapping TypeName="mpmModel.buscon_kriteria_berkas">
+              <MappingFragment StoreEntitySet="buscon_kriteria_berkas">
+                <ScalarProperty Name="id_kriteria" ColumnName="id_kriteria" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="id_kondisi" ColumnName="id_kondisi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="buscon_progress">
+            <EntityTypeMapping TypeName="mpmModel.buscon_progress">
+              <MappingFragment StoreEntitySet="buscon_progress">
+                <ScalarProperty Name="id_progress" ColumnName="id_progress" />
+                <ScalarProperty Name="tanggal" ColumnName="tanggal" />
+                <ScalarProperty Name="progress" ColumnName="progress" />
+                <ScalarProperty Name="deadline" ColumnName="deadline" />
+                <ScalarProperty Name="modify_by" ColumnName="modify_by" />
+                <ScalarProperty Name="id_sebab_akibat" ColumnName="id_sebab_akibat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="buscon_progress_berkas">
+            <EntityTypeMapping TypeName="mpmModel.buscon_progress_berkas">
+              <MappingFragment StoreEntitySet="buscon_progress_berkas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="id_progress" ColumnName="id_progress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="buscon_remind_once">
+            <EntityTypeMapping TypeName="mpmModel.buscon_remind_once">
+              <MappingFragment StoreEntitySet="buscon_remind_once">
+                <ScalarProperty Name="id_one_time" ColumnName="id_one_time" />
+                <ScalarProperty Name="id_buscon" ColumnName="id_buscon" />
+                <ScalarProperty Name="tanggal" ColumnName="tanggal" />
+                <ScalarProperty Name="on_off" ColumnName="on_off" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="buscon_remind_weekly">
+            <EntityTypeMapping TypeName="mpmModel.buscon_remind_weekly">
+              <MappingFragment StoreEntitySet="buscon_remind_weekly">
+                <ScalarProperty Name="id_weekly" ColumnName="id_weekly" />
+                <ScalarProperty Name="id_buscon" ColumnName="id_buscon" />
+                <ScalarProperty Name="senin" ColumnName="senin" />
+                <ScalarProperty Name="selasa" ColumnName="selasa" />
+                <ScalarProperty Name="rabu" ColumnName="rabu" />
+                <ScalarProperty Name="kamis" ColumnName="kamis" />
+                <ScalarProperty Name="jumat" ColumnName="jumat" />
+                <ScalarProperty Name="sabtu" ColumnName="sabtu" />
+                <ScalarProperty Name="on_off" ColumnName="on_off" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="buscon_sebab_akibat">
+            <EntityTypeMapping TypeName="mpmModel.buscon_sebab_akibat">
+              <MappingFragment StoreEntitySet="buscon_sebab_akibat">
+                <ScalarProperty Name="id_sebab_akibat" ColumnName="id_sebab_akibat" />
+                <ScalarProperty Name="sebab" ColumnName="sebab" />
+                <ScalarProperty Name="akibat" ColumnName="akibat" />
+                <ScalarProperty Name="rekomendasi" ColumnName="rekomendasi" />
+                <ScalarProperty Name="action_plant_mgmt" ColumnName="action_plant_mgmt" />
+                <ScalarProperty Name="deadline" ColumnName="deadline" />
+                <ScalarProperty Name="risk" ColumnName="risk" />
+                <ScalarProperty Name="status_close" ColumnName="status_close" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="divisis">
+            <EntityTypeMapping TypeName="mpmModel.divisi">
+              <MappingFragment StoreEntitySet="divisi">
+                <ScalarProperty Name="id_divisi" ColumnName="id_divisi" />
+                <ScalarProperty Name="kode_divisi" ColumnName="kode_divisi" />
+                <ScalarProperty Name="nama_divisi" ColumnName="nama_divisi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hirarkis">
+            <EntityTypeMapping TypeName="mpmModel.hirarki">
+              <MappingFragment StoreEntitySet="hirarki">
+                <ScalarProperty Name="id_hirarki" ColumnName="id_hirarki" />
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="level_parent" ColumnName="level_parent" />
+                <ScalarProperty Name="non_overdue" ColumnName="non_overdue" />
+                <ScalarProperty Name="overdue1_30" ColumnName="overdue1_30" />
+                <ScalarProperty Name="overdue30_" ColumnName="overdue30_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="perusahaans">
+            <EntityTypeMapping TypeName="mpmModel.perusahaan">
+              <MappingFragment StoreEntitySet="perusahaan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="nama" ColumnName="nama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reviews">
+            <EntityTypeMapping TypeName="mpmModel.review">
+              <MappingFragment StoreEntitySet="review">
+                <ScalarProperty Name="id_review" ColumnName="id_review" />
+                <ScalarProperty Name="nama_review" ColumnName="nama_review" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="mpmModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="simoes">
+            <EntityTypeMapping TypeName="mpmModel.simo">
+              <MappingFragment StoreEntitySet="simo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="review_name" ColumnName="review_name" />
+                <ScalarProperty Name="no_review" ColumnName="no_review" />
+                <ScalarProperty Name="tanggal" ColumnName="tanggal" />
+                <ScalarProperty Name="tempat" ColumnName="tempat" />
+                <ScalarProperty Name="peserta" ColumnName="peserta" />
+                <ScalarProperty Name="jam" ColumnName="jam" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="id_perusahaan" ColumnName="id_perusahaan" />
+                <ScalarProperty Name="status_lanjut" ColumnName="status_lanjut" />
+                <ScalarProperty Name="id_sebelum" ColumnName="id_sebelum" />
+                <ScalarProperty Name="id_sesudah" ColumnName="id_sesudah" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="simo_detail">
+            <EntityTypeMapping TypeName="mpmModel.simo_detail">
+              <MappingFragment StoreEntitySet="simo_detail">
+                <ScalarProperty Name="id_detail" ColumnName="id_detail" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tema" ColumnName="tema" />
+                <ScalarProperty Name="deskripsi" ColumnName="deskripsi" />
+                <ScalarProperty Name="divisi" ColumnName="divisi" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="deadline" ColumnName="deadline" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+                <ScalarProperty Name="is_close" ColumnName="is_close" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="simo_detail_berkas">
+            <EntityTypeMapping TypeName="mpmModel.simo_detail_berkas">
+              <MappingFragment StoreEntitySet="simo_detail_berkas">
+                <ScalarProperty Name="id_detail_berkas" ColumnName="id_detail_berkas" />
+                <ScalarProperty Name="waktu_simpan" ColumnName="waktu_simpan" />
+                <ScalarProperty Name="berkas" ColumnName="berkas" />
+                <ScalarProperty Name="id_detail" ColumnName="id_detail" />
+                <ScalarProperty Name="progress" ColumnName="progress" />
+                <ScalarProperty Name="modify_by" ColumnName="modify_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="simo_detail_berkas_deskripsi">
+            <EntityTypeMapping TypeName="mpmModel.simo_detail_berkas_deskripsi">
+              <MappingFragment StoreEntitySet="simo_detail_berkas_deskripsi">
+                <ScalarProperty Name="Id_berkas" ColumnName="Id_berkas" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="id_detail_berkas" ColumnName="id_detail_berkas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="simo_detail_pic">
+            <EntityTypeMapping TypeName="mpmModel.simo_detail_pic">
+              <MappingFragment StoreEntitySet="simo_detail_pic">
+                <ScalarProperty Name="id_detail_pic" ColumnName="id_detail_pic" />
+                <ScalarProperty Name="id_detail" ColumnName="id_detail" />
+                <ScalarProperty Name="divisi" ColumnName="divisi" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="npk" ColumnName="npk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="simo_remind_date">
+            <EntityTypeMapping TypeName="mpmModel.simo_remind_date">
+              <MappingFragment StoreEntitySet="simo_remind_date">
+                <ScalarProperty Name="id_one_time" ColumnName="id_one_time" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tanggal" ColumnName="tanggal" />
+                <ScalarProperty Name="on_off" ColumnName="on_off" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="simo_remind_weekly">
+            <EntityTypeMapping TypeName="mpmModel.simo_remind_weekly">
+              <MappingFragment StoreEntitySet="simo_remind_weekly">
+                <ScalarProperty Name="id_weekly" ColumnName="id_weekly" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="senin" ColumnName="senin" />
+                <ScalarProperty Name="selasa" ColumnName="selasa" />
+                <ScalarProperty Name="rabu" ColumnName="rabu" />
+                <ScalarProperty Name="kamis" ColumnName="kamis" />
+                <ScalarProperty Name="jumat" ColumnName="jumat" />
+                <ScalarProperty Name="sabtu" ColumnName="sabtu" />
+                <ScalarProperty Name="on_off" ColumnName="on_off" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status">
+            <EntityTypeMapping TypeName="mpmModel.status">
+              <MappingFragment StoreEntitySet="status">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="status1" ColumnName="status" />
+                <ScalarProperty Name="status_reminder" ColumnName="status_reminder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="mpmModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="idUserRoles" ColumnName="idUserRoles" />
+                <ScalarProperty Name="id_hirarki" ColumnName="id_hirarki" />
+                <ScalarProperty Name="id_divisi" ColumnName="id_divisi" />
+                <ScalarProperty Name="idRoleAtasan" ColumnName="idRoleAtasan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="mpmModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="level_parent" ColumnName="level_parent" />
+                <ScalarProperty Name="id_divisi" ColumnName="id_divisi" />
+                <ScalarProperty Name="id_hirarki" ColumnName="id_hirarki" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

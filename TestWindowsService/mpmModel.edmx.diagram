@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5da66dc9054b4a508852cb001c9741fa" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="mpmModel.C__MigrationHistory" Width="4.125" PointX="1.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.buscon" Width="1.5" PointX="5.25" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.buscon_anggota" Width="1.5" PointX="10.5" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.buscon_judul" Width="1.5" PointX="7.5" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.buscon_kondisi" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.buscon_kondisi_berkas" Width="1.5" PointX="12" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.buscon_kriteria_berkas" Width="1.5" PointX="12" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.buscon_progress" Width="1.5" PointX="8.5" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.buscon_progress_berkas" Width="1.5" PointX="10.75" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.buscon_remind_once" Width="1.5" PointX="7.5" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.buscon_remind_weekly" Width="1.5" PointX="7.5" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.buscon_sebab_akibat" Width="1.5" PointX="5.25" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.divisi" Width="1.5" PointX="0.75" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.hirarki" Width="1.5" PointX="0.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.perusahaan" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.review" Width="1.5" PointX="3" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.Role" Width="1.5" PointX="3.75" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.simo" Width="1.5" PointX="8.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.simo_detail" Width="1.5" PointX="13.5" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.simo_detail_berkas" Width="1.5" PointX="15.75" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.simo_detail_berkas_deskripsi" Width="1.5" PointX="18" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.simo_detail_pic" Width="1.5" PointX="3" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.simo_remind_date" Width="1.5" PointX="10.5" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.simo_remind_weekly" Width="1.5" PointX="10.5" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.status" Width="1.5" PointX="11.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.UserRole" Width="1.5" PointX="6" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="mpmModel.User" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <AssociationConnector Association="mpmModel.FK_buscon_anggota_buscon" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_buscon_created_by" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_buscon_ketua" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_buscon_remind_once_buscon" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_buscon_remind_weekly_buscon" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_buscon_review" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_judul_buscon" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_Perusahaan_buscon" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_buscon_anggota_user" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_buscon_kondisi_buscon_judul" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_buscon_kondisi_berkas" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_buscon_kriteria_buscon_kondisi" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_progress" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_progress_buscon_user" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_sebab_akibat" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_pic_buscon_user" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_dbo_UserRoles_dbo_divisi" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_simo_detail_pic_divisi" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_user_divisi" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_dbo_UserRoles_dbo_hirarki" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_hirarki_atasan" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_user_hirarki" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_Perusahaan_simo" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_dbo_UserRoles_dbo_Roles_RoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_simo_detail" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_simo_lanjutan_sebelum" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_simo_lanjutan_sesudah" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_simo_simo_remind_date" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_simo_simo_remind_weekly" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_simo_user" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_simo_detail_pic_simo_detail" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_simo_detail_simo_detail_berkas" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_simo_detail_status" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_simo_detail_berkas" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_simo_detail_pic_user" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_dbo_UserRoles_atasan" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_dbo_UserRoles_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="mpmModel.FK_user_atasan" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
